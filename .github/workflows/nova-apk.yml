@@ -28,13 +28,17 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          make android-apk-install-deps
 
       - name: Build APK
-        run: flutter build apk --release
+        run: |
+          make android-apk-release
 
       - name: Upload APK
         uses: actions/upload-artifact@v6
         with:
           name: Nova-VPN-APK
-          path: build/app/outputs/flutter-apk/*.apk
+          path: |
+            build/app/outputs/flutter-apk/*.apk
+            dist/**/*.apk
